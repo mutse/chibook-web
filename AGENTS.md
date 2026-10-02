@@ -19,3 +19,11 @@ Keep the selected visual direction. Include descriptive sections for WeRead acco
 ## Privacy and support pages
 
 Use `/Users/mutse/workspace/ai/chibook-app/docs/app-store/privacy-policy.html` and `support.html` as the content references for dedicated bilingual privacy and support pages. Link both from the website footer and preserve the established visual direction. The user confirmed `young@mutse.top` as the support email; use it for support and privacy requests.
+
+## 2026-10-02 download link
+
+The user confirmed the iPhone / iPad App Store download URL: https://apps.apple.com/us/app/chibook/id6810264383. Use this link for the iOS download entry and keep Chinese/English availability descriptions consistent. Android remains coming soon.
+
+## 2026-10-02 hidden integrations
+
+The user requested hiding WeRead and Z-Library from the website. Do not render their descriptive section in either language or mention them in page metadata. This supersedes the earlier requirement to display these product descriptions.

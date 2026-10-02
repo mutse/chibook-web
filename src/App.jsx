@@ -39,9 +39,9 @@ function DownloadDialog({
     <button className="icon-button close-dialog" aria-label={t("关闭下载窗口")} onClick={close}><X size={22} /></button>
     <img className="dialog-logo" src="/assets/logo.png" alt="" />
     <p className="eyebrow">YOUR NEXT CHAPTER</p><h2 id="download-title">{t("把 Chibook")}<br />{t("带在身边。")}</h2>
-    <p className="dialog-description">{t("你的私人书库，即将有一个新去处。")}<br />{t("正式下载开放后，可在这里获取 App。")}</p>
+    <p className="dialog-description">{t("你的私人书库，随身携带。")}<br />{t("iPhone / iPad 版可前往 App Store 下载。")}</p>
     <div className="platform"><AndroidLogo size={25} /><div><strong>Android</strong><span>{t("安装包准备中")}</span></div><span className="status-pill">{t("即将开放")}</span></div>
-    <div className="platform"><AppleLogo size={25} /><div><strong>iPhone / iPad</strong><span>{t("App Store 上架准备中")}</span></div><span className="status-pill">{t("即将开放")}</span></div>
+    <a className="platform" href="https://apps.apple.com/us/app/chibook/id6810264383" target="_blank" rel="noreferrer"><AppleLogo size={25} /><div><strong>iPhone / iPad</strong><span>{t("在 App Store 下载")}</span></div><span className="status-pill">{t("立即下载")}</span></a>
     <a className="project-link" href="https://github.com/mutse/chibook" target="_blank" rel="noreferrer">{t("查看项目进展")}<ArrowSquareOut size={17} /></a>
   </dialog>;
 }
@@ -57,7 +57,7 @@ export function App() {
   useEffect(() => {
     document.documentElement.lang = language === 'en' ? 'en' : 'zh-CN';
     document.title = language === 'en' ? 'Chibook · A new way to read.' : t("Chibook · 好书，换一种方式读。");
-    document.querySelector('meta[name="description"]')?.setAttribute('content', language === 'en' ? 'Your personal library. Import EPUB and PDF, explore WeRead bookshelf sync and Z-Library downloads, and switch between reading and listening.' : t("Chibook 私人书库：EPUB/PDF 阅读、AI 听书、微信读书书架同步与 Z-Library 电子书下载。"));
+    document.querySelector('meta[name="description"]')?.setAttribute('content', language === 'en' ? 'Your personal library. Import EPUB and PDF, and switch between reading and listening.' : t("Chibook 私人书库：EPUB/PDF 阅读、AI 听书，在阅读与聆听之间自由切换。"));
     if (infoPage) {
       const metadata = infoMetadata(language);
       document.title = metadata.title;
@@ -186,14 +186,7 @@ export function App() {
             title,
             lines
           }) => <article className="feature" key={title}><Icon size={31} /><h3>{t(title)}</h3><p>{t(lines[0])}<br />{t(lines[1])}</p></article>)}</div></section>
-      <section className="connections" id="connections" aria-labelledby="connections-title">
-        <div className="connections-intro"><p className="eyebrow">CONNECTED READING</p><h2 id="connections-title">{t("让每一本想读的书，")}<br />{t("来到你的书库。")}</h2><p>{t("连接熟悉的阅读清单，也为下一本好书留个位置。")}</p></div>
-        <div className="connection-list">
-          <article className="connection"><div className="connection-icon"><BookOpen size={26} /></div><div><span className="connection-label">{t("微信读书 · WeRead")}</span><h3>{t("登录一次，书架接着读。")}</h3><p>{t("登录微信读书账号，同步书架中的书籍信息，在 Chibook 中延续熟悉的阅读清单。")}</p><div className="connection-tags"><span>{t("微信读书登录")}</span><span>{t("书架同步")}</span></div></div></article>
-          <article className="connection"><div className="connection-icon"><DownloadSimple size={26} /></div><div><span className="connection-label">Z-Library</span><h3>{t("发现好书，下载后随心读。")}</h3><p>{t("通过 Z-Library 查找并下载电子书，将获取的 EPUB 或 PDF 文件导入 Chibook，集中管理、阅读与聆听。")}</p><div className="connection-tags"><span>{t("电子书下载")}</span><span>{t("EPUB / PDF 导入")}</span></div></div></article>
-        </div>
-      </section>
-      <section className="faq" id="faq"><div><p className="eyebrow">A LITTLE MORE ABOUT CHIBOOK</p><h2>{t("开始之前，")}<br />{t("你也许想知道。")}</h2><p className="faq-intro">{t("关于书库、阅读，还有你的下一本书。")}</p></div><div className="faq-list">{[[t("可以导入哪些格式的电子书？"), t("Chibook 支持导入你自己的 EPUB 和 PDF 文件。导入后，可以在私人书库中管理书籍并继续阅读。")], [t("没有网络，也能阅读和听书吗？"), t("已导入的书籍可在本地阅读。设备本地 TTS 可用于离线朗读；云端音色通常需要网络连接。")], [t("网页上的声音就是 App 的 AI 音色吗？"), t("这里提供浏览器语音试读，便于体验读听切换。实际声音由设备和浏览器决定，App 中可用的音色与设置可能不同。")], [t("在哪里下载 Chibook？"), t("正式安装链接正在准备中。点击“下载 Chibook”可以查看平台状态，也可以访问项目页面关注进展。")]].map(([q, a]) => <details key={q}><summary>{q}<CaretDown size={19} /></summary><p>{a}</p></details>)}</div></section>
+      <section className="faq" id="faq"><div><p className="eyebrow">A LITTLE MORE ABOUT CHIBOOK</p><h2>{t("开始之前，")}<br />{t("你也许想知道。")}</h2><p className="faq-intro">{t("关于书库、阅读，还有你的下一本书。")}</p></div><div className="faq-list">{[[t("可以导入哪些格式的电子书？"), t("Chibook 支持导入你自己的 EPUB 和 PDF 文件。导入后，可以在私人书库中管理书籍并继续阅读。")], [t("没有网络，也能阅读和听书吗？"), t("已导入的书籍可在本地阅读。设备本地 TTS 可用于离线朗读；云端音色通常需要网络连接。")], [t("网页上的声音就是 App 的 AI 音色吗？"), t("这里提供浏览器语音试读，便于体验读听切换。实际声音由设备和浏览器决定，App 中可用的音色与设置可能不同。")], [t("在哪里下载 Chibook？"), t("点击“下载 Chibook”，即可前往 App Store 下载 iPhone / iPad 版。Android 安装包仍在准备中。")]].map(([q, a]) => <details key={q}><summary>{q}<CaretDown size={19} /></summary><p>{a}</p></details>)}</div></section>
     </main>
     <footer><a className="brand footer-brand" href="#"><img src="/assets/logo.png" alt="" /><span>Chibook</span></a><span>{t("把时间，留给值得读的文字。")}</span><nav className="footer-links" aria-label={language === 'zh' ? '帮助与隐私' : 'Help and privacy'}><a href="/privacy-policy">{language === 'zh' ? '隐私政策' : 'Privacy policy'}</a><a href="/support">{language === 'zh' ? '支持页面' : 'Support'}</a><button onClick={openDownload}>{t("下载 Chibook")}<ArrowDown size={16} /></button></nav></footer>
     {download && <DownloadDialog close={closeDownload} t={t} />}

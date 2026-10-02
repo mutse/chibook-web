@@ -7,10 +7,10 @@ export const english = {
   '笔记与划线': 'Notes & highlights', '随时记录灵感': 'Capture an idea anytime', '让思考更有痕迹': 'Keep your thoughts close',
   '专注阅读': 'Focused reading', '纯净界面与书籍排版': 'Clean, considered typography', '沉浸每一次阅读': 'Get lost in every chapter',
   '关闭下载窗口': 'Close download dialog', '把 Chibook': 'Take Chibook', '带在身边。': 'with you.',
-  '你的私人书库，即将有一个新去处。': 'A new home for your personal library is on its way.', '正式下载开放后，可在这里获取 App。': 'Get the app here when downloads become available.',
-  '安装包准备中': 'Download being prepared', '即将开放': 'Coming soon', 'App Store 上架准备中': 'App Store release being prepared', '查看项目进展': 'Follow the project',
+  '你的私人书库，随身携带。': 'Your personal library, wherever you go.', 'iPhone / iPad 版可前往 App Store 下载。': 'Download the iPhone / iPad app from the App Store.',
+  '安装包准备中': 'Download being prepared', '即将开放': 'Coming soon', '在 App Store 下载': 'Download on the App Store', '立即下载': 'Download now', '查看项目进展': 'Follow the project',
   'Chibook · 好书，换一种方式读。': 'Chibook · A new way to read.',
-  'Chibook 私人书库：EPUB/PDF 阅读、AI 听书、微信读书书架同步与 Z-Library 电子书下载。': 'Your Chibook library: EPUB/PDF reading, AI narration, WeRead bookshelf sync and Z-Library ebook downloads.',
+  'Chibook 私人书库：EPUB/PDF 阅读、AI 听书，在阅读与聆听之间自由切换。': 'Your Chibook library: EPUB/PDF reading, AI narration, and seamless switching between reading and listening.',
   '当前浏览器不支持语音朗读，请在 App 中体验听书。': 'Speech is unavailable in this browser. Try listening in the app.',
   '正在朗读 · 浏览器音色演示': 'Playing · browser voice preview', '试读结束，愿你享受下一页。': 'Preview complete. Enjoy your next chapter.',
   '暂时无法播放，请检查设备语音设置后重试。': 'Unable to play. Check your device speech settings and try again.', '已停止朗读，可重新播放。': 'Stopped. Play again whenever you like.',
@@ -44,6 +44,6 @@ export const english = {
   '网页上的声音就是 App 的 AI 音色吗？': 'Is this the same voice as the app?',
   '这里提供浏览器语音试读，便于体验读听切换。实际声音由设备和浏览器决定，App 中可用的音色与设置可能不同。': 'This sample uses your browser’s speech synthesis to preview listening. The voice depends on your browser and device. Voices and settings in the app may differ.',
   '在哪里下载 Chibook？': 'Where can I download Chibook?',
-  '正式安装链接正在准备中。点击“下载 Chibook”可以查看平台状态，也可以访问项目页面关注进展。': 'Official downloads are being prepared. Select “Get Chibook” for platform availability, or follow the project for updates.',
+  '点击“下载 Chibook”，即可前往 App Store 下载 iPhone / iPad 版。Android 安装包仍在准备中。': 'Select “Get Chibook” to download the iPhone / iPad app from the App Store. The Android download is still being prepared.',
   '把时间，留给值得读的文字。': 'Make time for words worth reading.'
 };
