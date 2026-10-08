@@ -44,6 +44,11 @@ export const english = {
   '网页上的声音就是 App 的 AI 音色吗？': 'Is this the same voice as the app?',
   '这里提供浏览器语音试读，便于体验读听切换。实际声音由设备和浏览器决定，App 中可用的音色与设置可能不同。': 'This sample uses your browser’s speech synthesis to preview listening. The voice depends on your browser and device. Voices and settings in the app may differ.',
   '在哪里下载 Chibook？': 'Where can I download Chibook?',
+  '点击“下载 Chibook”，或直接': 'Select “Get Chibook”, or go directly',
+  '前往 App Store': 'to the App Store',
+  '下载 iPhone / iPad 版。': 'to download the iPhone / iPad version.',
+  'Android 安装包仍在准备中。': 'The Android package is still being prepared.',
+  '网站源码': 'Website source',
   '点击“下载 Chibook”，即可前往 App Store 下载 iPhone / iPad 版。Android 安装包仍在准备中。': 'Select “Get Chibook” to download the iPhone / iPad app from the App Store. The Android download is still being prepared.',
   '把时间，留给值得读的文字。': 'Make time for words worth reading.'
 };

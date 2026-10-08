@@ -23,7 +23,8 @@ The retained Product Design starter emits `dist/client` static assets and its Si
 - Reader demonstration with reading/listening tabs, font size, contents and temporary bookmark state.
 - Original demonstration text with browser speech synthesis, restart and rate changes. Audio availability and voice depend on browser/device; it is not connected to Chibook's cloud TTS service.
 - Accessible native download dialog, focus return and keyboard dismissal.
-- Android/iOS download status is clearly pending. Replace the platform status rows with real verified distribution links when available. The source project link is derived from the mobile app's configured Git remote.
+- Download status: iPhone / iPad is live on the App Store at https://apps.apple.com/us/app/chibook/id6810264383; Android remains coming soon. The download dialog and FAQ link directly to the App Store entry.
+- SEO/traffic: canonical URL, Open Graph/Twitter Cards, iOS Smart App Banner (`apple-itunes-app`), SoftwareApplication + FAQPage JSON-LD, and `public/llms.txt`.
 - No backend, analytics, uploads, external AI calls or persistent user data.
 
 ## Assets

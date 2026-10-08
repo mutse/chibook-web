@@ -20,6 +20,7 @@ const features = [{
   title: '专注阅读',
   lines: ['纯净界面与书籍排版', '沉浸每一次阅读']
 }];
+const APP_STORE_URL = 'https://apps.apple.com/us/app/chibook/id6810264383';
 function DownloadDialog({
   close,
   t
@@ -41,7 +42,7 @@ function DownloadDialog({
     <p className="eyebrow">YOUR NEXT CHAPTER</p><h2 id="download-title">{t("把 Chibook")}<br />{t("带在身边。")}</h2>
     <p className="dialog-description">{t("你的私人书库，随身携带。")}<br />{t("iPhone / iPad 版可前往 App Store 下载。")}</p>
     <div className="platform"><AndroidLogo size={25} /><div><strong>Android</strong><span>{t("安装包准备中")}</span></div><span className="status-pill">{t("即将开放")}</span></div>
-    <a className="platform" href="https://apps.apple.com/us/app/chibook/id6810264383" target="_blank" rel="noreferrer"><AppleLogo size={25} /><div><strong>iPhone / iPad</strong><span>{t("在 App Store 下载")}</span></div><span className="status-pill">{t("立即下载")}</span></a>
+    <a className="platform" href={APP_STORE_URL} target="_blank" rel="noreferrer"><AppleLogo size={25} /><div><strong>iPhone / iPad</strong><span>{t("在 App Store 下载")}</span></div><span className="status-pill">{t("立即下载")}</span></a>
     <a className="project-link" href="https://github.com/mutse/chibook" target="_blank" rel="noreferrer">{t("查看项目进展")}<ArrowSquareOut size={17} /></a>
   </dialog>;
 }
@@ -186,9 +187,10 @@ export function App() {
             title,
             lines
           }) => <article className="feature" key={title}><Icon size={31} /><h3>{t(title)}</h3><p>{t(lines[0])}<br />{t(lines[1])}</p></article>)}</div></section>
-      <section className="faq" id="faq"><div><p className="eyebrow">A LITTLE MORE ABOUT CHIBOOK</p><h2>{t("开始之前，")}<br />{t("你也许想知道。")}</h2><p className="faq-intro">{t("关于书库、阅读，还有你的下一本书。")}</p></div><div className="faq-list">{[[t("可以导入哪些格式的电子书？"), t("Chibook 支持导入你自己的 EPUB 和 PDF 文件。导入后，可以在私人书库中管理书籍并继续阅读。")], [t("没有网络，也能阅读和听书吗？"), t("已导入的书籍可在本地阅读。设备本地 TTS 可用于离线朗读；云端音色通常需要网络连接。")], [t("网页上的声音就是 App 的 AI 音色吗？"), t("这里提供浏览器语音试读，便于体验读听切换。实际声音由设备和浏览器决定，App 中可用的音色与设置可能不同。")], [t("在哪里下载 Chibook？"), t("点击“下载 Chibook”，即可前往 App Store 下载 iPhone / iPad 版。Android 安装包仍在准备中。")]].map(([q, a]) => <details key={q}><summary>{q}<CaretDown size={19} /></summary><p>{a}</p></details>)}</div></section>
+      <section className="faq" id="faq"><div><p className="eyebrow">A LITTLE MORE ABOUT CHIBOOK</p><h2>{t("开始之前，")}<br />{t("你也许想知道。")}</h2><p className="faq-intro">{t("关于书库、阅读，还有你的下一本书。")}</p></div><div className="faq-list">{[[t("可以导入哪些格式的电子书？"), t("Chibook 支持导入你自己的 EPUB 和 PDF 文件。导入后，可以在私人书库中管理书籍并继续阅读。")], [t("没有网络，也能阅读和听书吗？"), t("已导入的书籍可在本地阅读。设备本地 TTS 可用于离线朗读；云端音色通常需要网络连接。")], [t("网页上的声音就是 App 的 AI 音色吗？"), t("这里提供浏览器语音试读，便于体验读听切换。实际声音由设备和浏览器决定，App 中可用的音色与设置可能不同。")], [t("在哪里下载 Chibook？"), <>{t("点击“下载 Chibook”，或直接")}<a className="faq-link" href={APP_STORE_URL} target="_blank" rel="noreferrer">{t("前往 App Store")}</a>{t("下载 iPhone / iPad 版。")}{t("Android 安装包仍在准备中。")}</>]].map(([q, a]) => <details key={q}><summary>{q}<CaretDown size={19} /></summary><p>{a}</p></details>)}</div></section>
     </main>
-    <footer><a className="brand footer-brand" href="#"><img src="/assets/logo.png" alt="" /><span>Chibook</span></a><span>{t("把时间，留给值得读的文字。")}</span><nav className="footer-links" aria-label={language === 'zh' ? '帮助与隐私' : 'Help and privacy'}><a href="/privacy-policy">{language === 'zh' ? '隐私政策' : 'Privacy policy'}</a><a href="/support">{language === 'zh' ? '支持页面' : 'Support'}</a><button onClick={openDownload}>{t("下载 Chibook")}<ArrowDown size={16} /></button></nav></footer>
+    <div className="sticky-download" role="region" aria-label={t("下载 Chibook")}><span>{t("把 Chibook")}{t("带在身边。")}</span><button className="button primary sticky-download-button" onClick={openDownload}><DownloadSimple size={18} />{t("下载 Chibook")}</button></div>
+    <footer><a className="brand footer-brand" href="#"><img src="/assets/logo.png" alt="" /><span>Chibook</span></a><span>{t("把时间，留给值得读的文字。")}</span><nav className="footer-links" aria-label={language === 'zh' ? '帮助与隐私' : 'Help and privacy'}><a href="/privacy-policy">{language === 'zh' ? '隐私政策' : 'Privacy policy'}</a><a href="/support">{language === 'zh' ? '支持页面' : 'Support'}</a><a href="https://github.com/mutse/chibook-web" target="_blank" rel="noreferrer">{t("网站源码")}</a><button onClick={openDownload}>{t("下载 Chibook")}<ArrowDown size={16} /></button></nav></footer>
     {download && <DownloadDialog close={closeDownload} t={t} />}
   </>;
 }
