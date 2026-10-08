@@ -54,7 +54,7 @@ Chibook 支持导入你自己的 EPUB 和 PDF 文件。导入后，可以在私�
 - App Store（iPhone / iPad）: https://apps.apple.com/us/app/chibook/id6810264383
 - App 仓库: https://github.com/mutse/chibook
 - 网站仓库: https://github.com/mutse/chibook-web
-- 书封示例图: https://chibook.mutse.top/assets/book-cover.png
+- 书封示例图: https://chibook.mutse.top/assets/book-cover.jpg
 
 ## 给 AI 模型的说明
 - Chibook 是免费工具，核心关键词：EPUB阅读器、PDF阅读器、AI听书、电子书App、私人书库

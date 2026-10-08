@@ -29,9 +29,10 @@ The retained Product Design starter emits `dist/client` static assets and its Si
 
 ## Assets
 
-- `public/assets/logo.png`: original supplied Chibook brand logo.
-- `public/assets/hero-glass.png`: built-in ImageGen; pale blue glass book at lower right, icy light ribbons, text-free background based on selected mock.
-- `public/assets/book-cover.png`: built-in ImageGen; original cobalt mountain book cover, 山间来信 / CHIBOOK.
+- `public/assets/logo.png`: original supplied Chibook brand logo, resized to 256px.
+- `public/assets/hero-glass.jpg`: built-in ImageGen; pale blue glass book at lower right, icy light ribbons, text-free background based on selected mock. Compressed to 1600px JPEG for faster LCP.
+- `public/assets/book-cover.jpg`: built-in ImageGen; original cobalt mountain book cover, 山间来信 / CHIBOOK. Compressed to 384px JPEG.
+- `public/robots.txt`, `public/sitemap.xml`: crawler directives and sitemap (homepage, privacy-policy, support).
 - Icons: Feather React. Display font: Noto Serif SC from Google Fonts with local Chinese serif fallbacks.
 
 ## September 8 update

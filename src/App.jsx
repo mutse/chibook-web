@@ -38,7 +38,7 @@ function DownloadDialog({
     if (e.target === dialog.current) close();
   }} aria-labelledby="download-title">
     <button className="icon-button close-dialog" aria-label={t("关闭下载窗口")} onClick={close}><X size={22} /></button>
-    <img className="dialog-logo" src="/assets/logo.png" alt="" />
+    <img className="dialog-logo" src="/assets/logo.png" width="44" height="44" alt="Chibook" />
     <p className="eyebrow">YOUR NEXT CHAPTER</p><h2 id="download-title">{t("把 Chibook")}<br />{t("带在身边。")}</h2>
     <p className="dialog-description">{t("你的私人书库，随身携带。")}<br />{t("iPhone / iPad 版可前往 App Store 下载。")}</p>
     <div className="platform"><AndroidLogo size={25} /><div><strong>Android</strong><span>{t("安装包准备中")}</span></div><span className="status-pill">{t("即将开放")}</span></div>
@@ -160,7 +160,7 @@ export function App() {
   return <>
     <a className="skip-link" href="#main">{t("跳至正文")}</a>
     <header className="header">
-      <a className="brand" href="#" aria-label={t("Chibook 首页")}><img src="/assets/logo.png" alt="" /><span>Chibook</span></a>
+      <a className="brand" href="#" aria-label={t("Chibook 首页")}><img src="/assets/logo.png" width="42" height="42" alt="Chibook" /><span>Chibook</span></a>
       <div className="header-actions"><button className="language-switch" onClick={switchLanguage} aria-label={language === 'zh' ? 'Switch to English' : t("切换为中文")}><span lang="zh-CN" className={language === 'zh' ? 'active' : ''}>{t("中")}</span><span aria-hidden="true">/</span><span lang="en" className={language === 'en' ? 'active' : ''}>EN</span></button><button className="menu-toggle icon-button" aria-label={menu ? t("关闭导航") : t("打开导航")} aria-expanded={menu} onClick={() => setMenu(!menu)}>{menu ? <X size={25} /> : <List size={25} />}</button></div>
       <nav className={menu ? 'nav open' : 'nav'} aria-label={t("主导航")}><a href="#experience" onClick={() => setMenu(false)}>{t("阅读体验")}</a><button onClick={() => explore('listen')}>{t("AI 听书")}</button><a href="#faq" onClick={() => setMenu(false)}>{t("常见问题")}</a></nav>
     </header>
@@ -177,7 +177,7 @@ export function App() {
               </div>
             </div>
             <div className={'audio-card' + (tab === 'read' ? ' reading-mode' : '')}>
-              <div className="audio-heading">{tab === 'read' ? t("随时，切换到听书") : t("AI 听书")}<SpeakerHigh size={16} /></div><div className="audio-book"><img src="/assets/book-cover.png" alt={t("山间来信蓝色山峦书封")} /><div><strong>{t("山间来信")}</strong><p>{t("Chibook · 原创试读")}</p></div></div><div className="audio-progress"><span>{progress}%</span><progress aria-label={t("朗读进度")} value={progress} max="100" /><span>{t("试读")}</span></div><div className="audio-controls"><button className="rate-button" onClick={changeRate} aria-label={language === 'en' ? `Reading speed ${rate}x. Click to change.` : `朗读速度 ${rate} 倍，点击切换`}>{rate.toFixed(rate === 1 ? 1 : 2)}x</button><button className="icon-button" onClick={() => startSpeech()} aria-label={t("从头朗读")}><ArrowCounterClockwise size={23} /></button><button className="play-button" aria-label={playing ? t("停止朗读") : t("播放试读")} onClick={toggleSpeech}>{playing ? <Pause size={25} /> : <Play size={25} />}</button><button className="icon-button bookmark" aria-label={saved ? t("取消收藏") : t("收藏试读")} aria-pressed={saved} onClick={() => setSaved(!saved)}>{saved ? <Check size={22} /> : <BookmarkSimple size={22} />}</button></div><p className="speech-status" aria-live="polite">{speechStatus || t("点击播放，听一段阅读时光")}</p>
+              <div className="audio-heading">{tab === 'read' ? t("随时，切换到听书") : t("AI 听书")}<SpeakerHigh size={16} /></div><div className="audio-book"><img src="/assets/book-cover.jpg" width="48" height="74" alt={t("山间来信蓝色山峦书封")} /><div><strong>{t("山间来信")}</strong><p>{t("Chibook · 原创试读")}</p></div></div><div className="audio-progress"><span>{progress}%</span><progress aria-label={t("朗读进度")} value={progress} max="100" /><span>{t("试读")}</span></div><div className="audio-controls"><button className="rate-button" onClick={changeRate} aria-label={language === 'en' ? `Reading speed ${rate}x. Click to change.` : `朗读速度 ${rate} 倍，点击切换`}>{rate.toFixed(rate === 1 ? 1 : 2)}x</button><button className="icon-button" onClick={() => startSpeech()} aria-label={t("从头朗读")}><ArrowCounterClockwise size={23} /></button><button className="play-button" aria-label={playing ? t("停止朗读") : t("播放试读")} onClick={toggleSpeech}>{playing ? <Pause size={25} /> : <Play size={25} />}</button><button className="icon-button bookmark" aria-label={saved ? t("取消收藏") : t("收藏试读")} aria-pressed={saved} onClick={() => setSaved(!saved)}>{saved ? <Check size={22} /> : <BookmarkSimple size={22} />}</button></div><p className="speech-status" aria-live="polite">{speechStatus || t("点击播放，听一段阅读时光")}</p>
             </div>
           </div>
         </div>
@@ -190,7 +190,7 @@ export function App() {
       <section className="faq" id="faq"><div><p className="eyebrow">A LITTLE MORE ABOUT CHIBOOK</p><h2>{t("开始之前，")}<br />{t("你也许想知道。")}</h2><p className="faq-intro">{t("关于书库、阅读，还有你的下一本书。")}</p></div><div className="faq-list">{[[t("可以导入哪些格式的电子书？"), t("Chibook 支持导入你自己的 EPUB 和 PDF 文件。导入后，可以在私人书库中管理书籍并继续阅读。")], [t("没有网络，也能阅读和听书吗？"), t("已导入的书籍可在本地阅读。设备本地 TTS 可用于离线朗读；云端音色通常需要网络连接。")], [t("网页上的声音就是 App 的 AI 音色吗？"), t("这里提供浏览器语音试读，便于体验读听切换。实际声音由设备和浏览器决定，App 中可用的音色与设置可能不同。")], [t("在哪里下载 Chibook？"), <>{t("点击“下载 Chibook”，或直接")}<a className="faq-link" href={APP_STORE_URL} target="_blank" rel="noreferrer">{t("前往 App Store")}</a>{t("下载 iPhone / iPad 版。")}{t("Android 安装包仍在准备中。")}</>]].map(([q, a]) => <details key={q}><summary>{q}<CaretDown size={19} /></summary><p>{a}</p></details>)}</div></section>
     </main>
     <div className="sticky-download" role="region" aria-label={t("下载 Chibook")}><span>{t("把 Chibook")}{t("带在身边。")}</span><button className="button primary sticky-download-button" onClick={openDownload}><DownloadSimple size={18} />{t("下载 Chibook")}</button></div>
-    <footer><a className="brand footer-brand" href="#"><img src="/assets/logo.png" alt="" /><span>Chibook</span></a><span>{t("把时间，留给值得读的文字。")}</span><nav className="footer-links" aria-label={language === 'zh' ? '帮助与隐私' : 'Help and privacy'}><a href="/privacy-policy">{language === 'zh' ? '隐私政策' : 'Privacy policy'}</a><a href="/support">{language === 'zh' ? '支持页面' : 'Support'}</a><a href="https://github.com/mutse/chibook-web" target="_blank" rel="noreferrer">{t("网站源码")}</a><button onClick={openDownload}>{t("下载 Chibook")}<ArrowDown size={16} /></button></nav></footer>
+    <footer><a className="brand footer-brand" href="#"><img src="/assets/logo.png" width="30" height="30" alt="Chibook" /><span>Chibook</span></a><span>{t("把时间，留给值得读的文字。")}</span><nav className="footer-links" aria-label={language === 'zh' ? '帮助与隐私' : 'Help and privacy'}><a href="/privacy-policy">{language === 'zh' ? '隐私政策' : 'Privacy policy'}</a><a href="/support">{language === 'zh' ? '支持页面' : 'Support'}</a><a href="https://github.com/mutse/chibook-web" target="_blank" rel="noreferrer">{t("网站源码")}</a><button onClick={openDownload}>{t("下载 Chibook")}<ArrowDown size={16} /></button></nav></footer>
     {download && <DownloadDialog close={closeDownload} t={t} />}
   </>;
 }

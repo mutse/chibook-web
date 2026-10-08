@@ -57,7 +57,7 @@ export function InfoPage({ language, switchLanguage }) {
   return <>
     <a className="skip-link" href="#main">{c.skip}</a>
     <header className="header info-header">
-      <a className="brand" href="/" aria-label={`Chibook · ${c.home}`}><img src="/assets/logo.png" alt="" /><span>Chibook</span></a>
+      <a className="brand" href="/" aria-label={`Chibook · ${c.home}`}><img src="/assets/logo.png" width="42" height="42" alt="Chibook" /><span>Chibook</span></a>
       <button className="language-switch" onClick={switchLanguage} aria-label={language === 'zh' ? 'Switch to English' : '切换为中文'}><span lang="zh-CN" className={language === 'zh' ? 'active' : ''}>中</span><span aria-hidden="true">/</span><span lang="en" className={language === 'en' ? 'active' : ''}>EN</span></button>
     </header>
     <main id="main" className="info-page">
