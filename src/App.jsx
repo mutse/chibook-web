@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowDown, ArrowSquareOut, BookOpen, BookmarkSimple, CaretDown, Check, DownloadSimple, FolderSimple, Headphones, List, ListBullets, NotePencil, Pause, PencilSimple, Play, SpeakerHigh, Star, TextAa, X, AndroidLogo, AppleLogo, ArrowCounterClockwise } from './icons.jsx';
-import { english } from './translations.js';
+import { english, traditional } from './translations.js';
 import { InfoPage, infoPage, infoMetadata } from './InfoPages.jsx';
 const paragraphs = ['清晨，山里的风先于阳光来到窗前。树叶轻轻翻动，像有人在远处翻开一本书。', '我把手机调成静音，给自己留下一小段不被打扰的时间。读几页文字，也听听心里的声音。', '不必急着抵达最后一页。每一次停留，都让我们更接近自己。'];
 const features = [{
@@ -49,14 +49,15 @@ function DownloadDialog({
 export function App() {
   const [language, setLanguage] = useState(() => {
     try {
-      return localStorage.getItem('chibook-language') === 'en' ? 'en' : 'zh';
+      const saved = localStorage.getItem('chibook-language');
+      return saved === 'en' || saved === 'tw' ? saved : 'zh';
     } catch {
       return 'zh';
     }
   });
-  const t = text => language === 'en' ? english[text] || text : text;
+  const t = text => language === 'en' ? english[text] || text : language === 'tw' ? traditional[text] || text : text;
   useEffect(() => {
-    document.documentElement.lang = language === 'en' ? 'en' : 'zh-CN';
+    document.documentElement.lang = language === 'en' ? 'en' : language === 'tw' ? 'zh-TW' : 'zh-CN';
     document.title = language === 'en' ? 'Chibook · A new way to read.' : t("Chibook · 好书，换一种方式读。");
     document.querySelector('meta[name="description"]')?.setAttribute('content', language === 'en' ? 'Your personal library. Import EPUB and PDF, and switch between reading and listening.' : t("Chibook 私人书库：EPUB/PDF 阅读、AI 听书，在阅读与聆听之间自由切换。"));
     if (infoPage) {
@@ -99,9 +100,9 @@ export function App() {
     }
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(paragraphs.map(t).join(language === 'en' ? ' ' : ''));
-    utterance.lang = language === 'en' ? 'en-US' : 'zh-CN';
+    utterance.lang = language === 'en' ? 'en-US' : language === 'tw' ? 'zh-TW' : 'zh-CN';
     utterance.rate = nextRate;
-    const voice = window.speechSynthesis.getVoices().find(v => v.lang.startsWith(language));
+    const voice = window.speechSynthesis.getVoices().find(v => v.lang.startsWith(language === 'en' ? 'en' : 'zh'));
     if (voice) utterance.voice = voice;
     utterance.onstart = () => {
       setPlaying(true);
@@ -130,7 +131,8 @@ export function App() {
       setSpeechStatus(t("已停止朗读，可重新播放。"));
     } else startSpeech();
   }
-  function switchLanguage() {
+  function chooseLanguage(next) {
+    if (next === language) return;
     if (speech.current) {
       speech.current.onend = null;
       speech.current.onstart = null;
@@ -141,7 +143,16 @@ export function App() {
     setPlaying(false);
     setProgress(0);
     setSpeechStatus('');
-    setLanguage(current => current === 'zh' ? 'en' : 'zh');
+    setLanguage(next);
+  }
+  function LanguageSwitch() {
+    return <div className="language-switch" role="group" aria-label={t("语言")}>
+      <button onClick={() => chooseLanguage('zh')} aria-pressed={language === 'zh'}><span lang="zh-CN" className={language === 'zh' ? 'active' : ''}>简</span></button>
+      <span aria-hidden="true">/</span>
+      <button onClick={() => chooseLanguage('tw')} aria-pressed={language === 'tw'}><span lang="zh-TW" className={language === 'tw' ? 'active' : ''}>繁</span></button>
+      <span aria-hidden="true">/</span>
+      <button onClick={() => chooseLanguage('en')} aria-pressed={language === 'en'}><span lang="en" className={language === 'en' ? 'active' : ''}>EN</span></button>
+    </div>;
   }
   function changeRate() {
     const next = rate === 1 ? 1.25 : rate === 1.25 ? 1.5 : 1;
@@ -156,18 +167,18 @@ export function App() {
     });
     setMenu(false);
   }
-  if (infoPage) return <InfoPage language={language} switchLanguage={switchLanguage} />;
+  if (infoPage) return <InfoPage language={language} chooseLanguage={chooseLanguage} t={t} />;
   return <>
     <a className="skip-link" href="#main">{t("跳至正文")}</a>
     <header className="header">
       <a className="brand" href="#" aria-label={t("Chibook 首页")}><img src="/assets/logo.png" width="42" height="42" alt="Chibook" /><span>Chibook</span></a>
-      <div className="header-actions"><button className="language-switch" onClick={switchLanguage} aria-label={language === 'zh' ? 'Switch to English' : t("切换为中文")}><span lang="zh-CN" className={language === 'zh' ? 'active' : ''}>{t("中")}</span><span aria-hidden="true">/</span><span lang="en" className={language === 'en' ? 'active' : ''}>EN</span></button><button className="menu-toggle icon-button" aria-label={menu ? t("关闭导航") : t("打开导航")} aria-expanded={menu} onClick={() => setMenu(!menu)}>{menu ? <X size={25} /> : <List size={25} />}</button></div>
+      <div className="header-actions"><LanguageSwitch /><button className="menu-toggle icon-button" aria-label={menu ? t("关闭导航") : t("打开导航")} aria-expanded={menu} onClick={() => setMenu(!menu)}>{menu ? <X size={25} /> : <List size={25} />}</button></div>
       <nav className={menu ? 'nav open' : 'nav'} aria-label={t("主导航")}><a href="#experience" onClick={() => setMenu(false)}>{t("阅读体验")}</a><button onClick={() => explore('listen')}>{t("AI 听书")}</button><a href="#faq" onClick={() => setMenu(false)}>{t("常见问题")}</a></nav>
     </header>
     <main id="main">
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-inner">
-          <div className="hero-copy"><span className="quiet-label">Quiet Reading</span><h1 id="hero-title">{language === 'zh' ? <>{t("好书，")}<br />{t("换一种方式")}<span>{t("读。")}</span></> : <>Good books.<br />A new way<br />to <span>read.</span></>}</h1><p className="hero-description">{t("把你的 EPUB 与 PDF 收进私人书库，")}<br className="desktop-break" />{t("在阅读与聆听之间，自由切换。")}</p><div className="hero-actions"><button className="button primary" onClick={openDownload}><DownloadSimple size={23} />{t("下载 Chibook")}</button><button className="button secondary" onClick={() => explore('read')}><Play size={21} />{t("了解阅读体验")}</button></div></div>
+          <div className="hero-copy"><span className="quiet-label">Quiet Reading</span><h1 id="hero-title">{language === 'en' ? <>Good books.<br />A new way<br />to <span>read.</span></> : <>{t("好书，")}<br />{t("换一种方式")}<span>{t("读。")}</span></>}</h1><p className="hero-description">{t("把你的 EPUB 与 PDF 收进私人书库，")}<br className="desktop-break" />{t("在阅读与聆听之间，自由切换。")}</p><div className="hero-actions"><button className="button primary" onClick={openDownload}><DownloadSimple size={23} />{t("下载 Chibook")}</button><button className="button secondary" onClick={() => explore('read')}><Play size={21} />{t("了解阅读体验")}</button></div></div>
           <div className="product-scene" ref={reader} id="reader-demo">
             <div className="reader-window">
               <aside className="reader-sidebar"><div className="window-controls" aria-hidden="true"><i /><i /><i /></div><p className="sidebar-caption">{t("书架")}</p><div className="sidebar-item selected"><BookOpen />{t("全部")}<span>1</span></div><div className="sidebar-item"><Headphones />{t("在听")}<span>{playing ? 1 : 0}</span></div><div className="sidebar-item"><BookmarkSimple />{t("未读")}<span>0</span></div><div className="sidebar-item"><Star />{t("收藏")}<span>{saved ? 1 : 0}</span></div><p className="sidebar-caption library-caption">{t("我的书库")}</p><div className="sidebar-item"><FolderSimple />{t("散文与随笔")}</div><p className="sidebar-bottom">CHIBOOK<br /><span>{t("你的私人阅读时光")}</span></p></aside>
@@ -190,7 +201,7 @@ export function App() {
       <section className="faq" id="faq"><div><p className="eyebrow">A LITTLE MORE ABOUT CHIBOOK</p><h2>{t("开始之前，")}<br />{t("你也许想知道。")}</h2><p className="faq-intro">{t("关于书库、阅读，还有你的下一本书。")}</p></div><div className="faq-list">{[[t("可以导入哪些格式的电子书？"), t("Chibook 支持导入你自己的 EPUB 和 PDF 文件。导入后，可以在私人书库中管理书籍并继续阅读。")], [t("没有网络，也能阅读和听书吗？"), t("已导入的书籍可在本地阅读。设备本地 TTS 可用于离线朗读；云端音色通常需要网络连接。")], [t("网页上的声音就是 App 的 AI 音色吗？"), t("这里提供浏览器语音试读，便于体验读听切换。实际声音由设备和浏览器决定，App 中可用的音色与设置可能不同。")], [t("在哪里下载 Chibook？"), <>{t("点击“下载 Chibook”，或直接")}<a className="faq-link" href={APP_STORE_URL} target="_blank" rel="noreferrer">{t("前往 App Store")}</a>{t("下载 iPhone / iPad 版。")}{t("Android 安装包仍在准备中。")}</>]].map(([q, a]) => <details key={q}><summary>{q}<CaretDown size={19} /></summary><p>{a}</p></details>)}</div></section>
     </main>
     <div className="sticky-download" role="region" aria-label={t("下载 Chibook")}><span>{t("把 Chibook")}{t("带在身边。")}</span><button className="button primary sticky-download-button" onClick={openDownload}><DownloadSimple size={18} />{t("下载 Chibook")}</button></div>
-    <footer><a className="brand footer-brand" href="#"><img src="/assets/logo.png" width="30" height="30" alt="Chibook" /><span>Chibook</span></a><span>{t("把时间，留给值得读的文字。")}</span><nav className="footer-links" aria-label={language === 'zh' ? '帮助与隐私' : 'Help and privacy'}><a href="/privacy-policy">{language === 'zh' ? '隐私政策' : 'Privacy policy'}</a><a href="/support">{language === 'zh' ? '支持页面' : 'Support'}</a><a href="https://github.com/mutse/chibook-web" target="_blank" rel="noreferrer">{t("网站源码")}</a><button onClick={openDownload}>{t("下载 Chibook")}<ArrowDown size={16} /></button></nav></footer>
+    <footer><a className="brand footer-brand" href="#"><img src="/assets/logo.png" width="30" height="30" alt="Chibook" /><span>Chibook</span></a><span>{t("把时间，留给值得读的文字。")}</span><nav className="footer-links" aria-label={t("帮助与隐私")}><a href="/privacy-policy">{t("隐私政策")}</a><a href="/support">{t("支持页面")}</a><a href="https://github.com/mutse/chibook-web" target="_blank" rel="noreferrer">{t("网站源码")}</a><button onClick={openDownload}>{t("下载 Chibook")}<ArrowDown size={16} /></button></nav></footer>
     {download && <DownloadDialog close={closeDownload} t={t} />}
   </>;
 }

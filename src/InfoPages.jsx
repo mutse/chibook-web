@@ -51,6 +51,31 @@ const copy = {
       ['Deleting data', 'In ChiBook, open Me → Clear all local data.']
     ],
     contact: 'Contact us', supportContact: 'Contact support', privacyContact: 'For support or privacy requests, contact us at the email address below.', supportBody: 'For help, email us at:'
+  },
+  tw: {
+    privacy: '隱私政策', support: '支援頁面', home: '返回首頁', skip: '跳至正文', nav: '頁面導覽',
+    privacyTitle: '耳讀隱私政策', supportTitle: '耳讀 App 支援', date: '更新日期：2026 年 10 月 2 日',
+    privacyIntro: '耳讀（ChiBook）是一款本地優先的閱讀與聽書工具。我們重視你的隱私，並盡量讓核心功能在裝置上完成。',
+    supportIntro: '耳讀支援匯入 TXT、EPUB 和 PDF，並使用 iPhone 或 iPad 的系統語音進行朗讀。',
+    sections: [
+      ['我們如何處理資料', [
+        '你主動匯入的 TXT、EPUB、PDF 檔案，以及閱讀進度、顯示偏好、筆記與劃線、聽書位置和時長，保存在 App 的本地沙盒中，用於提供閱讀與聽書功能。耳讀不會把這些內容上傳到開發者伺服器。',
+        '選擇檔案時，耳讀僅獲得你在 Apple 系統檔案選擇器中明確選中的檔案。PDF 的文字辨識使用 Apple Vision 在裝置端完成。'
+      ]],
+      ['追蹤、廣告與第三方', ['App Store 版本不包含廣告 SDK，不進行跨 App 追蹤，不出售個人資訊，也不要求建立耳讀帳戶。系統語音由 iOS 提供。系統可能按你的 iCloud 或裝置備份設定備份應用資料，該過程由 Apple 和你的系統設定管理。']],
+      ['App 內購買', ['Chibook Pro 為一次性內購。付款、退款和 Apple 帳戶驗證由 Apple 處理，應用透過 StoreKit 在裝置上驗證購買權益；開發者不接收付款卡資訊。我們不將交易或文件上傳到開發者伺服器，也未加入行為追蹤 SDK。', '清除本地資料不撤銷購買。同一 Apple 帳戶可在「我的 → Chibook Pro → 恢復購買」恢復權益；恢復購買不會同步書籍或閱讀記錄。']],
+      ['保留與刪除', ['資料會保留在裝置上，直到你主動刪除。在 App 內開啟「我的」，選擇「清除所有本地資料」，可永久刪除匯入檔案、閱讀記錄、筆記、快取和憑證。解除安裝 App 也會移除其沙盒資料；系統備份副本依照 Apple 的備份規則處理。']]
+    ],
+    faq: '常見問題', questions: [
+      ['無法匯入檔案', '請確認副檔名為 .txt、.epub 或 .pdf，並在系統檔案 App 中確認檔案已下載完成。'],
+      ['PDF 無法朗讀', '掃描版 PDF 需要逐頁辨識，清晰度、分欄和字體編碼會影響結果；部分受密碼保護的檔案無法處理。'],
+      ['沒有合適的聲音', '可在 iOS「設定 → 輔助功能 → 朗讀內容 → 聲音」中下載更多系統語音。'],
+      ['免費額度', '可同時保留 3 本自匯入書籍，歡迎指南不佔額度；刪除會一併清理相關劃線和進度並釋放名額。Pro 一次性解鎖無限書架，不自動續費。'],
+      ['恢復購買', '在「我的 → Chibook Pro」選擇「恢復購買」，並使用購買時的 Apple 帳戶。此操作僅恢復權益，不同步書籍。退款後已有書籍仍可閱讀和聽書，新增匯入受免費額度限制。'],
+      ['購買無法載入', '請檢查網路和系統購買限制，點擊「重新整理價格與購買狀態」。最終價格以 App Store 為準。'],
+      ['刪除資料', '在耳讀中開啟「我的 → 清除所有本地資料」。']
+    ],
+    contact: '聯絡我們', supportContact: '聯絡支援', privacyContact: '如需支援或提出隱私請求，請透過以下信箱聯絡我們。', supportBody: '如需協助，請傳送郵件至：'
   }
 };
 
@@ -59,14 +84,20 @@ export function infoMetadata(language) {
   return { title: infoPage === 'privacy' ? c.privacyTitle : c.supportTitle, description: infoPage === 'privacy' ? c.privacyIntro : c.supportIntro };
 }
 
-export function InfoPage({ language, switchLanguage }) {
+export function InfoPage({ language, chooseLanguage, t }) {
   const c = copy[language];
   const privacy = infoPage === 'privacy';
   return <>
     <a className="skip-link" href="#main">{c.skip}</a>
     <header className="header info-header">
       <a className="brand" href="/" aria-label={`Chibook · ${c.home}`}><img src="/assets/logo.png" width="42" height="42" alt="Chibook" /><span>Chibook</span></a>
-      <button className="language-switch" onClick={switchLanguage} aria-label={language === 'zh' ? 'Switch to English' : '切换为中文'}><span lang="zh-CN" className={language === 'zh' ? 'active' : ''}>中</span><span aria-hidden="true">/</span><span lang="en" className={language === 'en' ? 'active' : ''}>EN</span></button>
+      <div className="language-switch" role="group" aria-label={t("语言")}>
+        <button onClick={() => chooseLanguage('zh')} aria-pressed={language === 'zh'}><span lang="zh-CN" className={language === 'zh' ? 'active' : ''}>简</span></button>
+        <span aria-hidden="true">/</span>
+        <button onClick={() => chooseLanguage('tw')} aria-pressed={language === 'tw'}><span lang="zh-TW" className={language === 'tw' ? 'active' : ''}>繁</span></button>
+        <span aria-hidden="true">/</span>
+        <button onClick={() => chooseLanguage('en')} aria-pressed={language === 'en'}><span lang="en" className={language === 'en' ? 'active' : ''}>EN</span></button>
+      </div>
     </header>
     <main id="main" className="info-page">
       <a className="info-back" href="/">← {c.home}</a>
