@@ -1,0 +1,32 @@
+name: Build & Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Deploy to Cloudflare Pages
+        # Fork PR 需要在仓库 Settings > Secrets 中配置：
+        # CLOUDFLARE_API_TOKEN（Pages 写权限）、CLOUDFLARE_ACCOUNT_ID
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=chibook-web --branch=production
