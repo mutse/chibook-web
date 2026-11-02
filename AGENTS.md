@@ -27,3 +27,7 @@ The user confirmed the iPhone / iPad App Store download URL: https://apps.apple.
 ## 2026-10-02 hidden integrations
 
 The user requested hiding WeRead and Z-Library from the website. Do not render their descriptive section in either language or mention them in page metadata. This supersedes the earlier requirement to display these product descriptions.
+
+## 2026-11-02 style reference
+
+The user requested visual refinement inspired by https://chitv.fit. Use its restrained warm off-white surfaces, deep blue accents, rounded download buttons, generous spacing, and clean feature cards as styling references while retaining Chibook's reading/listening identity and established product content.
