@@ -36,3 +36,60 @@ h1{font-size:58px;line-height:1.4;letter-spacing:-1.5px}.hero-description{color:
 @media(max-width:760px){.header{height:76px;padding-inline:20px}.brand{font-size:21px}.nav{background:#f8f8f4}.hero{height:auto;min-height:790px}.hero-inner{padding:46px 24px 0;min-height:790px}.quiet-label{margin-bottom:20px}h1{font-size:41px}.hero-description{font-size:14px;margin-bottom:28px}.hero-actions{gap:10px}.button{font-size:12px;height:50px;padding-inline:16px}.product-scene{margin-top:38px;transform:scale(.5);height:350px}.experience{padding:52px 24px;gap:28px}.experience-copy{text-align:left}.experience h2{font-size:25px}.experience-copy p{font-size:13px}.feature-grid{gap:12px}.feature{padding:22px 18px;min-height:184px}.feature h3{font-size:15px}.feature p{font-size:11px}.faq{padding-block:45px 55px;gap:18px}.faq h2{font-size:29px}.sticky-download-button{height:44px}.info-card{padding:28px 24px}html[lang=en] .hero-inner{min-height:850px}}
 @media(min-width:420px) and (max-width:760px){.product-scene{transform:scale(.6);height:390px}}
 @media(max-width:360px){h1{font-size:36px}.hero-actions{flex-wrap:wrap}.product-scene{transform:scale(.45)}.header{padding-inline:16px}}
+
+/* Apple Liquid Glass — visual layer only.
+   Surfaces turn translucent, blurred and edge-lit; class names, layout, typography,
+   copy and every interaction stay exactly as before. Keeps the warm off-white /
+   deep-blue identity from the 2026-11-02 chitv.fit-inspired direction. */
+:root{
+  --glass-tint:linear-gradient(135deg,rgba(255,255,255,.62),rgba(255,255,255,.28));
+  --glass-tint-strong:linear-gradient(135deg,rgba(255,255,255,.72),rgba(255,255,255,.42));
+  --glass-ring:inset 0 0 0 1px rgba(255,255,255,.65),inset 0 1px 0 rgba(255,255,255,.75),inset 0 -1px 0 rgba(255,255,255,.28);
+  --glass-shadow:0 12px 40px rgba(38,78,112,.12);
+  --glass-blur:blur(20px) saturate(180%) brightness(1.04);
+  --glass-blur-strong:blur(26px) saturate(190%) brightness(1.05);
+}
+/* Ambient light for the glass to refract — soft blue, aqua and warm glows over the paper base. */
+body{background:
+  radial-gradient(1100px 620px at 88% -8%,rgba(83,117,255,.16),transparent 62%),
+  radial-gradient(900px 520px at -12% 32%,rgba(64,190,190,.13),transparent 62%),
+  radial-gradient(1000px 720px at 50% 108%,rgba(255,196,140,.14),transparent 62%),
+  #f6f5f0}
+.hero{background:
+  radial-gradient(ellipse at 78% 60%,rgba(217,231,238,.82) 0,transparent 55%),
+  linear-gradient(135deg,rgba(246,245,240,.58) 25%,rgba(237,243,245,.58))}
+/* Sticky glass header — the bar floats above content so the blur has something to refract. */
+.header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(255,255,255,.6),rgba(246,245,240,.42));-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);border-bottom:1px solid rgba(255,255,255,.65);box-shadow:0 10px 30px rgba(38,78,112,.07),inset 0 -1px 0 rgba(255,255,255,.5)}
+.language-switch{background:var(--glass-tint);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);border:1px solid rgba(255,255,255,.65);box-shadow:var(--glass-ring),0 4px 16px rgba(38,78,112,.06)}
+.quiet-label{background:var(--glass-tint);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);border:1px solid rgba(255,255,255,.65);box-shadow:var(--glass-ring)}
+.button.secondary{background:var(--glass-tint);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);border:1px solid rgba(255,255,255,.7);box-shadow:var(--glass-ring),0 8px 24px rgba(38,78,112,.08)}
+.primary{background:linear-gradient(180deg,#2e5d82,#264e70);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -1px 0 rgba(0,0,0,.18),0 10px 26px rgba(38,78,112,.28)}
+.play-button{box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 6px 18px rgba(38,78,112,.35)}
+/* Hero demo — the reader window and the floating audio card are the hero glass pieces. */
+.reader-window{background:var(--glass-tint-strong);-webkit-backdrop-filter:var(--glass-blur-strong);backdrop-filter:var(--glass-blur-strong);border:1px solid rgba(255,255,255,.7);box-shadow:0 0 0 10px rgba(255,255,255,.28),0 28px 70px rgba(46,83,107,.16),var(--glass-ring)}
+.audio-card{background:var(--glass-tint-strong);-webkit-backdrop-filter:var(--glass-blur-strong);backdrop-filter:var(--glass-blur-strong);border:1px solid rgba(255,255,255,.7);box-shadow:0 20px 45px rgba(38,78,112,.18),var(--glass-ring)}
+.contents-panel{background:linear-gradient(135deg,rgba(255,255,255,.82),rgba(244,247,255,.6));-webkit-backdrop-filter:var(--glass-blur-strong);backdrop-filter:var(--glass-blur-strong);border:1px solid rgba(255,255,255,.7);box-shadow:0 16px 40px rgba(38,78,112,.14),var(--glass-ring)}
+.sidebar-item.selected{background:linear-gradient(135deg,rgba(255,255,255,.75),rgba(228,237,242,.5));box-shadow:var(--glass-ring)}
+/* Feature cards. */
+.feature{background:var(--glass-tint);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);border:1px solid rgba(255,255,255,.65);box-shadow:var(--glass-ring),var(--glass-shadow)}
+.feature:hover{box-shadow:var(--glass-ring),0 18px 44px rgba(38,78,112,.16)}
+/* FAQ — glass tint only while open; no padding or layout change. */
+.faq-list details{border-radius:16px}
+.faq-list details[open]{background:var(--glass-tint);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);box-shadow:var(--glass-ring),0 10px 30px rgba(38,78,112,.08);border-bottom-color:transparent}
+/* Download dialog. */
+.download-dialog{background:linear-gradient(135deg,rgba(255,255,255,.78),rgba(246,247,242,.55));-webkit-backdrop-filter:var(--glass-blur-strong);backdrop-filter:var(--glass-blur-strong);border:1px solid rgba(255,255,255,.75);box-shadow:0 24px 100px rgba(24,44,76,.28),var(--glass-ring)}
+.download-dialog::backdrop{background:rgba(20,39,72,.28);-webkit-backdrop-filter:blur(14px) saturate(160%);backdrop-filter:blur(14px) saturate(160%)}
+.status-pill{background:linear-gradient(135deg,rgba(255,255,255,.7),rgba(229,237,240,.5));border:1px solid rgba(255,255,255,.6)}
+/* Info pages (privacy / support) — the same glass on the article card and the back link. */
+.info-card{background:var(--glass-tint-strong);-webkit-backdrop-filter:var(--glass-blur-strong);backdrop-filter:var(--glass-blur-strong);border:1px solid rgba(255,255,255,.7);box-shadow:0 18px 60px rgba(38,78,112,.12),var(--glass-ring)}
+.info-back{background:var(--glass-tint);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);border:1px solid rgba(255,255,255,.65);border-radius:999px;padding:8px 16px;box-shadow:var(--glass-ring)}
+/* Mobile chrome — floating glass nav sheet and bottom download bar. */
+@media(max-width:760px){
+  .nav{background:linear-gradient(135deg,rgba(255,255,255,.82),rgba(248,248,244,.6));-webkit-backdrop-filter:var(--glass-blur-strong);backdrop-filter:var(--glass-blur-strong);border:1px solid rgba(255,255,255,.7);box-shadow:0 18px 44px rgba(48,73,116,.18),var(--glass-ring)}
+  .sticky-download{background:linear-gradient(180deg,rgba(255,255,255,.68),rgba(246,245,240,.5));-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);border-top:1px solid rgba(255,255,255,.65);box-shadow:0 -8px 30px rgba(38,78,112,.08)}
+}
+/* Fallback: no backdrop-filter support → more opaque surfaces so text stays readable. */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .header,.language-switch,.quiet-label,.button.secondary,.reader-window,.audio-card,.contents-panel,.feature,.download-dialog,.info-card,.info-back{background:#fbfcfff2}
+  .faq-list details[open]{background:#fbfcfff2}
+}
